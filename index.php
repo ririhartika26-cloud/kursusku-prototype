@@ -1,3 +1,4 @@
 <?php
-echo "halo, ini projek kursusku-prototype";
+$sistemname = 'kursusku';
+echo 'Selamat datang di ' . $sistemname;
 ?>
