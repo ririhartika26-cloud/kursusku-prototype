@@ -1,18 +1,27 @@
 <?php
-function rupiah(int $amount): string {
-    return 'Rp ' . number_format($amount, 0, ',', '.');
+
+function rupiah($angka)
+{
+    return 'Rp ' . number_format($angka, 0, ',', '.');
 }
 
-function statusKursus(int $quota, int $registered): string {
-    return $registered >= $quota ? 'Penuh' : 'Tersedia';
+function statusKursus($peserta, $kapasitas)
+{
+    if ($peserta >= $kapasitas) {
+        return 'Penuh';
+    }
+
+    return 'Tersedia';
 }
 
-function sisaKursi(int $quota, int $registered): int {
-    return max(0, $quota - $registered);
+function sisaKursi($peserta, $kapasitas)
+{
+    return $kapasitas - $peserta;
 }
 
-function formatTanggal(string $date): string {
-    $value = new DateTimeImmutable($date);
-    return $value->format('d-m-Y');
+function formatTanggal($tanggal)
+{
+    return date('d-m-Y', strtotime($tanggal));
 }
+
 ?>

@@ -1,0 +1,49 @@
+TEST MATRIX PERTEMUAN 5 - KURSUSKU
+
+1. Load form
+Status: Lulus
+Catatan: Halaman registration.php tampil tanpa error.
+
+2. Required
+Status: Lulus
+Catatan: Form kosong ditahan oleh browser karena field wajib.
+
+3. Email
+Status: Lulus
+Catatan: Browser meminta format email yang valid.
+
+4. Nama pendek
+Status: Lulus
+Catatan: Field nama dapat digunakan untuk memasukkan nama peserta.
+
+5. GET
+Status: Lulus
+Catatan: Setelah method diubah menjadi GET, parameter form terlihat pada URL.
+
+6. POST
+Status: Lulus
+Catatan: Setelah method dikembalikan ke POST, data tidak tampil sebagai query string pada URL.
+
+7. Radio
+Status: Lulus
+Catatan: Pilihan Mahasiswa atau Umum tampil pada hasil pendaftaran.
+
+8. Checkbox
+Status: Lulus
+Catatan: Pilihan minat yang dipilih tampil pada hasil pendaftaran.
+
+9. Textarea
+Status: Lulus
+Catatan: Catatan yang dimasukkan tampil kembali pada hasil pendaftaran.
+
+10. Hidden
+Status: Lulus
+Catatan: Nilai sumber website-kursusku diterima dan ditampilkan.
+
+11. Mobile
+Status: Lulus
+Catatan: Form dapat digunakan pada ukuran sekitar 360 px tanpa horizontal scroll.
+
+12. Navigasi
+Status: Lulus
+Catatan: Link Beranda, Katalog, dan Daftar Kursus menuju tujuan yang benar.

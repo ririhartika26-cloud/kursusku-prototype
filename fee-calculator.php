@@ -1,15 +1,15 @@
 <?php
 
-$namaKursus = 'Web Development';
-$hargaKursus = 750000;
-$jumlahPeserta = 2;
-$diskonPersen = 10;
-$biayaAdmin = 25000;
+$courseName = 'Web Development';
+$fee = 750000;
+$participantCount = 2;
+$discountPercent = 10;
+$adminFee = 25000;
 
-$subtotal = $hargaKursus * $jumlahPeserta;
-$nilaiDiskon = $subtotal * ($diskonPersen / 100);
-$totalSetelahDiskon = $subtotal - $nilaiDiskon;
-$totalBayar = $totalSetelahDiskon + $biayaAdmin;
+$subtotal = $fee * $participantCount;
+$discount = $subtotal * ($discountPercent / 100);
+$totalBeforeAdmin = $subtotal - $discount;
+$total = $totalBeforeAdmin + $adminFee;
 
 ?>
 
@@ -53,21 +53,21 @@ $totalBayar = $totalSetelahDiskon + $biayaAdmin;
 
     <section>
 
-        <h1>Kalkulator Estimasi Biaya Kursus</h1>
+        <h1>Kalkulator Estimasi Biaya</h1>
 
         <p>
-            <strong>Kursus:</strong>
-            <?= htmlspecialchars($namaKursus) ?>
+            <strong>Nama Kursus:</strong>
+            <?= htmlspecialchars($courseName) ?>
         </p>
 
         <p>
             <strong>Harga per Peserta:</strong>
-            Rp <?= number_format($hargaKursus, 0, ',', '.') ?>
+            Rp <?= number_format($fee, 0, ',', '.') ?>
         </p>
 
         <p>
             <strong>Jumlah Peserta:</strong>
-            <?= $jumlahPeserta ?>
+            <?= $participantCount ?>
         </p>
 
         <p>
@@ -77,22 +77,27 @@ $totalBayar = $totalSetelahDiskon + $biayaAdmin;
 
         <p>
             <strong>Diskon:</strong>
-            <?= $diskonPersen ?>%
+            <?= $discountPercent ?>%
         </p>
 
         <p>
             <strong>Nilai Diskon:</strong>
-            Rp <?= number_format($nilaiDiskon, 0, ',', '.') ?>
+            Rp <?= number_format($discount, 0, ',', '.') ?>
         </p>
 
         <p>
             <strong>Biaya Admin:</strong>
-            Rp <?= number_format($biayaAdmin, 0, ',', '.') ?>
+            Rp <?= number_format($adminFee, 0, ',', '.') ?>
+        </p>
+
+        <p>
+            <strong>Total Setelah Diskon:</strong>
+            Rp <?= number_format($totalBeforeAdmin, 0, ',', '.') ?>
         </p>
 
         <h2>
             Total Bayar:
-            Rp <?= number_format($totalBayar, 0, ',', '.') ?>
+            Rp <?= number_format($total, 0, ',', '.') ?>
         </h2>
 
         <a href="index.php" class="button">

@@ -1,9 +1,5 @@
 <?php
 
-require_once 'helpers.php';
-
-$kursusDipilih = $_GET['kursus'] ?? '';
-
 $daftarKursus = [
     'Web Development',
     'Desain Grafis',
@@ -13,71 +9,69 @@ $daftarKursus = [
     'UI/UX Design'
 ];
 
+$kursusDipilih = $_GET['kursus'] ?? '';
+
 ?>
 
 <!doctype html>
 <html lang="id">
 
 <head>
-
     <meta charset="utf-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Pendaftaran KursusKu</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
 
 <body>
 
 <header>
-
-    <nav>
+    <nav aria-label="Navigasi utama">
 
         <a href="index.php">
-            KursusKu
+            <strong>KursusKu</strong>
         </a>
 
         <a href="index.php#katalog">
             Katalog
         </a>
 
-    </nav>
+        <a href="registration.php">
+            Daftar Kursus
+        </a>
 
+    </nav>
 </header>
 
 <main>
 
     <section>
 
-        <h1>Formulir Pendaftaran Kursus</h1>
+        <h1>Pendaftaran Kursus</h1>
 
-        <form
-            action="process-registration.php"
-            method="GET"
-        >
+        <p>
+            Silakan isi data berikut untuk melakukan pendaftaran kursus.
+        </p>
 
-           <div class="form-group">
+        <form action="process-registration.php" method="POST">
 
-    <label for="nama">
-        Nama Lengkap
-    </label>
+            <div class="form-group">
 
-    <input 
-        type="text" 
-        id="nama" 
-        name="nama"
-        placeholder="Masukkan nama lengkap"
-        autocomplete="off"
-        required
-    >
+                <label for="nama">
+                    Nama Lengkap
+                </label>
 
-</div>
+                <input
+                    type="text"
+                    id="nama"
+                    name="nama"
+                    placeholder="Masukkan nama lengkap"
+                    required
+                >
+
+            </div>
 
 
             <div class="form-group">
@@ -90,6 +84,7 @@ $daftarKursus = [
                     type="email"
                     id="email"
                     name="email"
+                    placeholder="Masukkan email"
                     required
                 >
 
@@ -106,6 +101,7 @@ $daftarKursus = [
                     type="tel"
                     id="telepon"
                     name="telepon"
+                    placeholder="Masukkan nomor telepon"
                     required
                 >
 
@@ -122,6 +118,7 @@ $daftarKursus = [
                     type="text"
                     id="prodi"
                     name="prodi"
+                    placeholder="Masukkan program studi"
                     required
                 >
 
@@ -171,7 +168,7 @@ $daftarKursus = [
                     <label>
                         <input
                             type="radio"
-                            name="jenis_peserta"
+                            name="participant_type"
                             value="Mahasiswa"
                             required
                         >
@@ -181,7 +178,16 @@ $daftarKursus = [
                     <label>
                         <input
                             type="radio"
-                            name="jenis_peserta"
+                            name="participant_type"
+                            value="Guru"
+                        >
+                        Guru
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="participant_type"
                             value="Umum"
                         >
                         Umum
@@ -203,16 +209,16 @@ $daftarKursus = [
                     <label>
                         <input
                             type="checkbox"
-                            name="minat[]"
-                            value="Teknologi"
+                            name="interests[]"
+                            value="Web Development"
                         >
-                        Teknologi
+                        Web Development
                     </label>
 
                     <label>
                         <input
                             type="checkbox"
-                            name="minat[]"
+                            name="interests[]"
                             value="Desain"
                         >
                         Desain
@@ -221,10 +227,19 @@ $daftarKursus = [
                     <label>
                         <input
                             type="checkbox"
-                            name="minat[]"
-                            value="Bisnis"
+                            name="interests[]"
+                            value="Data Analysis"
                         >
-                        Bisnis
+                        Data Analysis
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="interests[]"
+                            value="Digital Marketing"
+                        >
+                        Digital Marketing
                     </label>
 
                 </div>
@@ -241,7 +256,8 @@ $daftarKursus = [
                 <textarea
                     id="catatan"
                     name="catatan"
-                    placeholder="Tulis catatan jika diperlukan..."
+                    rows="4"
+                    placeholder="Tulis catatan jika ada"
                 ></textarea>
 
             </div>
@@ -250,7 +266,7 @@ $daftarKursus = [
             <input
                 type="hidden"
                 name="source"
-                value="website-kursusku"
+                value="website"
             >
 
 

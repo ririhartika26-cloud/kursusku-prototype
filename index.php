@@ -6,8 +6,7 @@ $siteName = 'KursusKu';
 $tagline = 'Belajar, daftar, dan kelola kursus dalam satu tempat.';
 $year = date('Y');
 
-$kursus = [
-
+$daftarKursus = [
     [
         'nama' => 'Web Development',
         'kategori' => 'Teknologi',
@@ -16,7 +15,6 @@ $kursus = [
         'kapasitas' => 20,
         'tanggal' => '2026-10-05'
     ],
-
     [
         'nama' => 'Desain Grafis',
         'kategori' => 'Desain',
@@ -25,7 +23,6 @@ $kursus = [
         'kapasitas' => 20,
         'tanggal' => '2026-10-10'
     ],
-
     [
         'nama' => 'Digital Marketing',
         'kategori' => 'Bisnis',
@@ -34,7 +31,6 @@ $kursus = [
         'kapasitas' => 20,
         'tanggal' => '2026-10-15'
     ],
-
     [
         'nama' => 'Microsoft Office',
         'kategori' => 'Komputer',
@@ -43,7 +39,6 @@ $kursus = [
         'kapasitas' => 20,
         'tanggal' => '2026-10-20'
     ],
-
     [
         'nama' => 'Data Analysis',
         'kategori' => 'Teknologi',
@@ -52,7 +47,6 @@ $kursus = [
         'kapasitas' => 20,
         'tanggal' => '2026-10-25'
     ],
-
     [
         'nama' => 'UI/UX Design',
         'kategori' => 'Desain',
@@ -61,7 +55,6 @@ $kursus = [
         'kapasitas' => 20,
         'tanggal' => '2026-10-30'
     ]
-
 ];
 
 ?>
@@ -70,62 +63,38 @@ $kursus = [
 <html lang="id">
 
 <head>
-
     <meta charset="utf-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title><?= htmlspecialchars($siteName) ?></title>
 
     <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
+
 <body>
 
 <header>
-
-    <nav>
+    <nav aria-label="Navigasi utama">
 
         <a href="index.php">
-            KursusKu
+            <strong>KursusKu</strong>
         </a>
 
-        <a href="#keunggulan">
-            Keunggulan
-        </a>
-
-        <a href="#katalog">
+        <a href="index.php#katalog">
             Katalog
         </a>
 
-        <a href="#alur">
-            Cara Daftar
-        </a>
-
-        <a href="#media">
-            Media
-        </a>
-
-        <a href="#kontak">
-            Kontak
-        </a>
-
-        <a href="fee-calculator.php">
-            Kalkulator Biaya
+        <a href="registration.php">
+            Daftar Kursus
         </a>
 
     </nav>
-
 </header>
 
 
 <main>
 
     <!-- HERO -->
-
     <section id="hero">
 
         <h1>
@@ -144,18 +113,25 @@ $kursus = [
 
 
     <!-- KEUNGGULAN -->
-
     <section id="keunggulan">
 
-        <h2>Keunggulan KursusKu</h2>
+        <h2>
+            Keunggulan KursusKu
+        </h2>
 
         <ul>
 
-            <li>Informasi kursus mudah dipahami</li>
+            <li>
+                Kursus Terarah
+            </li>
 
-            <li>Pendaftaran kursus lebih sederhana</li>
+            <li>
+                Materi Praktis
+            </li>
 
-            <li>Data kursus tersusun dengan rapi</li>
+            <li>
+                Pendaftaran Mudah
+            </li>
 
         </ul>
 
@@ -163,16 +139,17 @@ $kursus = [
 
 
     <!-- KATALOG -->
-
     <section id="katalog">
 
-        <h2>Katalog Kursus</h2>
+        <h2>
+            Katalog Kursus
+        </h2>
 
         <p>
-            Pilih kursus yang sesuai dengan kebutuhan belajar Anda.
+            Pilih kursus sesuai kebutuhan dan minat belajar Anda.
         </p>
 
-        <?php foreach ($kursus as $item): ?>
+        <?php foreach ($daftarKursus as $item): ?>
 
             <article>
 
@@ -181,70 +158,81 @@ $kursus = [
                 </h3>
 
                 <p>
-                    Kategori:
+                    <strong>Kategori:</strong>
                     <?= htmlspecialchars($item['kategori']) ?>
                 </p>
 
                 <p>
-                    Harga:
+                    <strong>Harga:</strong>
                     <?= rupiah($item['harga']) ?>
                 </p>
 
                 <p>
-                    Peserta:
+                    <strong>Peserta:</strong>
                     <?= $item['peserta'] ?>
-                    / <?= $item['kapasitas'] ?>
+                    /
+                    <?= $item['kapasitas'] ?>
                 </p>
 
                 <p>
-                    Status:
-                    <?= statusKursus(
-                        $item['peserta'],
-                        $item['kapasitas']
-                    ) ?>
+                    <strong>Status:</strong>
+                    <?= statusKursus($item['peserta'], $item['kapasitas']) ?>
                 </p>
 
                 <p>
-                    Sisa kursi:
-                    <?= sisaKursi(
-                        $item['peserta'],
-                        $item['kapasitas']
-                    ) ?>
+                    <strong>Sisa Kursi:</strong>
+                    <?= sisaKursi($item['peserta'], $item['kapasitas']) ?>
                 </p>
 
                 <p>
-                    Tanggal:
+                    <strong>Mulai:</strong>
                     <?= formatTanggal($item['tanggal']) ?>
                 </p>
 
-                <a href="registration.php?kursus=<?= urlencode($item['nama']) ?>" class="button">
+                <a
+                    href="registration.php?kursus=<?= urlencode($item['nama']) ?>"
+                    class="button"
+                >
                     Daftar Kursus
                 </a>
 
             </article>
 
-            <hr>
-
         <?php endforeach; ?>
+
+        <p>
+            <a href="fee-calculator.php" class="button">
+                Lihat Estimasi Biaya
+            </a>
+        </p>
 
     </section>
 
 
-    <!-- CARA DAFTAR -->
-
+    <!-- ALUR -->
     <section id="alur">
 
-        <h2>Cara Daftar Kursus</h2>
+        <h2>
+            Cara Mendaftar
+        </h2>
 
         <ol>
 
-            <li>Pilih kursus yang ingin diikuti.</li>
+            <li>
+                Pilih kursus yang ingin diikuti.
+            </li>
 
-            <li>Isi formulir pendaftaran.</li>
+            <li>
+                Klik tombol Daftar Kursus.
+            </li>
 
-            <li>Periksa kembali data pendaftaran.</li>
+            <li>
+                Isi formulir pendaftaran.
+            </li>
 
-            <li>Kirim formulir pendaftaran.</li>
+            <li>
+                Kirim formulir dan lihat hasil pendaftaran.
+            </li>
 
         </ol>
 
@@ -252,50 +240,61 @@ $kursus = [
 
 
     <!-- MEDIA -->
-
     <section id="media">
 
-        <h2>Media Pembelajaran</h2>
+        <h2>
+            Media Pembelajaran
+        </h2>
 
         <p>
-            Contoh media yang digunakan dalam kegiatan pembelajaran.
+            Kenali KursusKu melalui media berikut.
         </p>
 
         <img
             src="assets/images/hero-kursus.jpg"
-            alt="Kegiatan pembelajaran kursus"
-            width="600"
+            alt="Ilustrasi pembelajaran KursusKu"
         >
 
-        <br><br>
-
-        <video controls width="600">
-
+        <video controls>
             <source
                 src="assets/video/intro-kursus.mp4"
                 type="video/mp4"
             >
 
-            Browser Anda tidak mendukung video HTML5.
-
+            Browser Anda tidak mendukung video.
         </video>
 
     </section>
 
 
     <!-- KONTAK -->
-
     <section id="kontak">
 
-        <h2>Kontak</h2>
+        <h2>
+            Kontak
+        </h2>
 
         <p>
-            Hubungi kami untuk mendapatkan informasi lebih lanjut
-            mengenai kursus yang tersedia.
+            Untuk informasi lebih lanjut mengenai KursusKu,
+            silakan hubungi kami melalui email.
         </p>
 
         <p>
-            Email: info@kursusku.test
+            Email:
+            <a href="mailto:info@kursusku.test">
+                info@kursusku.test
+            </a>
+        </p>
+
+        <p>
+            Dokumentasi PHP:
+            <a
+                href="https://www.php.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                PHP Documentation
+            </a>
         </p>
 
     </section>
@@ -306,13 +305,11 @@ $kursus = [
 <footer>
 
     <p>
-        &copy; <?= $year ?>
-        <?= htmlspecialchars($siteName) ?>.
+        &copy; <?= $year ?> <?= htmlspecialchars($siteName) ?>.
         Semua hak dilindungi.
     </p>
 
 </footer>
 
 </body>
-
 </html>

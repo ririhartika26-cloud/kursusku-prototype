@@ -1,0 +1,57 @@
+LOCAL VS HOSTING - KURSUSKU
+
+1. Local Development
+
+Aplikasi KursusKu saat ini dijalankan pada lingkungan lokal menggunakan Laragon.
+File proyek berada di komputer sendiri dan dapat diakses melalui alamat lokal,
+misalnya:
+
+http://kursusku-prototype.test/
+
+Lingkungan lokal digunakan untuk membuat, menjalankan, menguji, dan memperbaiki
+aplikasi sebelum dipindahkan ke server publik.
+
+2. Hosting / Production
+
+Hosting adalah lingkungan ketika aplikasi ditempatkan pada server publik sehingga
+dapat diakses melalui internet.
+
+Berbeda dengan lingkungan lokal, aplikasi pada hosting harus dikonfigurasi dengan
+lebih aman karena dapat diakses oleh pengguna dari luar komputer.
+
+3. HTTPS
+
+HTTPS diperlukan pada hosting untuk menjaga kerahasiaan data selama proses
+pengiriman antara browser dan server.
+
+POST tidak berarti data otomatis terenkripsi. HTTPS tetap diperlukan pada server
+publik.
+
+4. Debug
+
+Pada saat pengembangan lokal, proses debug dapat dilakukan untuk menemukan dan
+memperbaiki kesalahan aplikasi.
+
+Pada production, konfigurasi debug harus diperhatikan agar informasi kesalahan
+yang sensitif tidak ditampilkan kepada pengguna.
+
+5. Secret
+
+Data rahasia seperti password, API key, dan informasi konfigurasi sensitif tidak
+boleh ditulis sembarangan atau dibagikan pada aplikasi yang dapat diakses publik.
+
+6. Document Root
+
+Document root adalah folder utama yang digunakan server web untuk menyajikan
+file aplikasi kepada browser.
+
+Pada proyek KursusKu di lingkungan Laragon, proyek berada di:
+
+C:\laragon\www\kursusku-prototype
+
+7. Kesimpulan
+
+Local digunakan untuk proses pengembangan dan pengujian aplikasi, sedangkan
+hosting digunakan untuk menjalankan aplikasi pada server publik. Sebelum
+dipublikasikan, aplikasi perlu memperhatikan keamanan, HTTPS, konfigurasi debug,
+secret, dan document root.
