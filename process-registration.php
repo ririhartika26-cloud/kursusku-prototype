@@ -1,172 +1,55 @@
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     header('Location: registration.php');
     exit;
 }
 
+$nama = trim($_GET['nama'] ?? '');
+$email = trim($_GET['email'] ?? '');
+$telepon = trim($_GET['telepon'] ?? '');
+$prodi = trim($_GET['prodi'] ?? '');
+$kursus = trim($_GET['kursus'] ?? '');
+$participantType = trim($_GET['participant_type'] ?? '');
+$interests = $_GET['interests'] ?? [];
+$catatan = trim($_GET['catatan'] ?? '');
+$source = trim($_GET['source'] ?? '');
 
-/*
-|--------------------------------------------------------------------------
-| Mengambil data dari form
-|--------------------------------------------------------------------------
-*/
+$errors = [];
 
-$nama = trim($_POST['nama'] ?? '');
-$email = trim($_POST['email'] ?? '');
-$telepon = trim($_POST['telepon'] ?? '');
-$prodi = trim($_POST['prodi'] ?? '');
-$kursus = trim($_POST['kursus'] ?? '');
-
-$participantType = $_POST['participant_type'] ?? '';
-
-$interests = $_POST['interests'] ?? [];
-
-$catatan = trim($_POST['catatan'] ?? '');
-
-$source = $_POST['source'] ?? '';
-
-
-/*
-|--------------------------------------------------------------------------
-| Validasi sederhana
-|--------------------------------------------------------------------------
-*/
-
-if (
-    $nama === '' ||
-    $email === '' ||
-    $telepon === '' ||
-    $prodi === '' ||
-    $kursus === '' ||
-    $participantType === ''
-) {
-
-    echo '<h2>Data belum lengkap</h2>';
-
-    echo '<p>Data yang wajib diisi belum lengkap.</p>';
-
-    echo '<p>
-        <a href="registration.php">
-            Kembali ke Form Pendaftaran
-        </a>
-    </p>';
-
-    exit;
+if ($nama === '') {
+    $errors[] = 'Nama wajib diisi.';
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| Daftar harga kursus
-|--------------------------------------------------------------------------
-*/
-
-$hargaKursus = [
-
-    'Web Development' => 750000,
-
-    'Desain Grafis' => 650000,
-
-    'Digital Marketing' => 800000,
-
-    'Microsoft Office' => 500000,
-
-    'Data Analysis' => 900000,
-
-    'UI/UX Design' => 850000
-
-];
-
-
-/*
-|--------------------------------------------------------------------------
-| Mengambil harga berdasarkan kursus
-|--------------------------------------------------------------------------
-*/
-
-$fee = $hargaKursus[$kursus] ?? 0;
-
-
-/*
-|--------------------------------------------------------------------------
-| Diskon berdasarkan jenis peserta
-|--------------------------------------------------------------------------
-|
-| Aturan diskon proyek:
-| Mahasiswa = 10%
-| Guru      = 15%
-| Umum      = 5%
-|
-*/
-
-$discountPercent = 0;
-
-if ($participantType === 'Mahasiswa') {
-
-    $discountPercent = 10;
-
-} elseif ($participantType === 'Guru') {
-
-    $discountPercent = 15;
-
-} elseif ($participantType === 'Umum') {
-
-    $discountPercent = 5;
-
+if ($email === '') {
+    $errors[] = 'Email wajib diisi.';
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = 'Email tidak valid.';
 }
 
+if ($telepon === '') {
+    $errors[] = 'Nomor telepon wajib diisi.';
+}
 
-/*
-|--------------------------------------------------------------------------
-| Perhitungan biaya
-|--------------------------------------------------------------------------
-*/
+if ($prodi === '') {
+    $errors[] = 'Program studi wajib diisi.';
+}
 
-$participantCount = 1;
+if ($kursus === '') {
+    $errors[] = 'Kursus wajib dipilih.';
+}
 
-$adminFee = 25000;
-
-$subtotal = $fee * $participantCount;
-
-$discount = intdiv(
-    $subtotal * $discountPercent,
-    100
-);
-
-$totalBeforeAdmin = $subtotal - $discount;
-
-$total = $totalBeforeAdmin + $adminFee;
-
-
-/*
-|--------------------------------------------------------------------------
-| Minat belajar
-|--------------------------------------------------------------------------
-*/
+if ($participantType === '') {
+    $errors[] = 'Jenis peserta wajib dipilih.';
+}
 
 if (!is_array($interests)) {
     $interests = [];
 }
 
-$interestsText = !empty($interests)
-    ? implode(', ', $interests)
-    : 'Tidak ada';
-
-
-/*
-|--------------------------------------------------------------------------
-| Fungsi keamanan output
-|--------------------------------------------------------------------------
-*/
-
 function e($value)
 {
-    return htmlspecialchars(
-        (string) $value,
-        ENT_QUOTES,
-        'UTF-8'
-    );
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
 ?>
@@ -198,7 +81,7 @@ function e($value)
 
 <header>
 
-    <nav aria-label="Navigasi utama">
+    <nav>
 
         <a href="index.php">
             <strong>KursusKu</strong>
@@ -216,232 +99,138 @@ function e($value)
 
 </header>
 
-
 <main>
 
     <section>
 
-        <h1>
-            Pendaftaran Berhasil
-        </h1>
+        <?php if (!empty($errors)): ?>
 
+            <h1>Data Belum Lengkap</h1>
 
-        <div class="success">
+            <div class="success">
 
-            <p>
-                Data pendaftaran berhasil diterima.
-            </p>
+                <ul>
 
-        </div>
+                    <?php foreach ($errors as $error): ?>
 
+                        <li>
+                            <?= e($error) ?>
+                        </li>
 
-        <h2>
-            Ringkasan Pendaftaran
-        </h2>
+                    <?php endforeach; ?>
 
+                </ul>
 
-        <p>
-
-            <strong>Nama Lengkap:</strong>
-
-            <?= e($nama) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Email:</strong>
-
-            <?= e($email) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Nomor Telepon:</strong>
-
-            <?= e($telepon) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Program Studi:</strong>
-
-            <?= e($prodi) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Pilihan Kursus:</strong>
-
-            <?= e($kursus) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Jenis Peserta:</strong>
-
-            <?= e($participantType) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Minat Belajar:</strong>
-
-            <?= e($interestsText) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Catatan:</strong>
-
-            <?= $catatan !== ''
-                ? e($catatan)
-                : 'Tidak ada'
-            ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Source:</strong>
-
-            <?= e($source) ?>
-
-        </p>
-
-
-        <h2>
-            Rincian Biaya
-        </h2>
-
-
-        <p>
-
-            <strong>Harga Kursus:</strong>
-
-            Rp <?= number_format(
-                $fee,
-                0,
-                ',',
-                '.'
-            ) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Subtotal:</strong>
-
-            Rp <?= number_format(
-                $subtotal,
-                0,
-                ',',
-                '.'
-            ) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Jenis Peserta:</strong>
-
-            <?= e($participantType) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Diskon:</strong>
-
-            <?= $discountPercent ?>%
-
-        </p>
-
-
-        <p>
-
-            <strong>Nilai Diskon:</strong>
-
-            Rp <?= number_format(
-                $discount,
-                0,
-                ',',
-                '.'
-            ) ?>
-
-        </p>
-
-
-        <p>
-
-            <strong>Biaya Admin:</strong>
-
-            Rp <?= number_format(
-                $adminFee,
-                0,
-                ',',
-                '.'
-            ) ?>
-
-        </p>
-
-
-        <h2>
-
-            Total Bayar:
-
-            Rp <?= number_format(
-                $total,
-                0,
-                ',',
-                '.'
-            ) ?>
-
-        </h2>
-
-
-        <p>
+            </div>
 
             <a
                 href="registration.php"
                 class="button"
             >
-
-                Daftar Lagi
-
+                Kembali ke Form
             </a>
 
-        </p>
+        <?php else: ?>
+
+            <h1>
+                Pendaftaran Berhasil
+            </h1>
+
+            <div class="success">
+
+                <strong>
+                    Data berhasil dikirim melalui method GET.
+                </strong>
+
+            </div>
+
+            <h2>
+                Ringkasan Pendaftaran
+            </h2>
+
+            <p>
+                <strong>Nama:</strong>
+                <?= e($nama) ?>
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                <?= e($email) ?>
+            </p>
+
+            <p>
+                <strong>Nomor Telepon:</strong>
+                <?= e($telepon) ?>
+            </p>
+
+            <p>
+                <strong>Program Studi:</strong>
+                <?= e($prodi) ?>
+            </p>
+
+            <p>
+                <strong>Kursus:</strong>
+                <?= e($kursus) ?>
+            </p>
+
+            <p>
+                <strong>Jenis Peserta:</strong>
+                <?= e($participantType) ?>
+            </p>
+
+            <p>
+                <strong>Minat:</strong>
+
+                <?php if (empty($interests)): ?>
+
+                    Tidak ada
+
+                <?php else: ?>
+
+                    <?= e(implode(', ', $interests)) ?>
+
+                <?php endif; ?>
+
+            </p>
+
+            <p>
+                <strong>Catatan:</strong>
+
+                <?php if ($catatan !== ''): ?>
+
+                    <?= e($catatan) ?>
+
+                <?php else: ?>
+
+                    Tidak ada
+
+                <?php endif; ?>
+
+            </p>
+
+            <p>
+                <strong>Sumber:</strong>
+                <?= e($source) ?>
+            </p>
+
+            <a
+                href="registration.php"
+                class="button"
+            >
+                Kembali ke Form
+            </a>
+
+        <?php endif; ?>
 
     </section>
 
 </main>
 
-
 <footer>
 
     <p>
-
         &copy; <?= date('Y') ?> KursusKu.
         Semua hak dilindungi.
-
     </p>
 
 </footer>

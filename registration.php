@@ -17,18 +17,28 @@ $kursusDipilih = $_GET['kursus'] ?? '';
 <html lang="id">
 
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
 
     <title>Pendaftaran KursusKu</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
 </head>
 
 <body>
 
 <header>
-    <nav aria-label="Navigasi utama">
+
+    <nav>
 
         <a href="index.php">
             <strong>KursusKu</strong>
@@ -43,243 +53,277 @@ $kursusDipilih = $_GET['kursus'] ?? '';
         </a>
 
     </nav>
+
 </header>
 
 <main>
 
-    <section>
+<section>
 
-        <h1>Pendaftaran Kursus</h1>
+    <h1>Pendaftaran KursusKu</h1>
 
-        <p>
-            Silakan isi data berikut untuk melakukan pendaftaran kursus.
-        </p>
+    <p>
+        Silakan isi data pendaftaran kursus dengan lengkap.
+    </p>
 
-        <form action="process-registration.php" method="POST">
+    <form
+        action="process-registration.php"
+        method="GET"
+    >
 
-            <div class="form-group">
+        <!-- NAMA -->
 
-                <label for="nama">
-                    Nama Lengkap
-                </label>
+        <div class="form-group">
 
-                <input
-                    type="text"
-                    id="nama"
-                    name="nama"
-                    placeholder="Masukkan nama lengkap"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="email">
-                    Email
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Masukkan email"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="telepon">
-                    Nomor Telepon
-                </label>
-
-                <input
-                    type="tel"
-                    id="telepon"
-                    name="telepon"
-                    placeholder="Masukkan nomor telepon"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="prodi">
-                    Program Studi
-                </label>
-
-                <input
-                    type="text"
-                    id="prodi"
-                    name="prodi"
-                    placeholder="Masukkan program studi"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="kursus">
-                    Pilihan Kursus
-                </label>
-
-                <select
-                    id="kursus"
-                    name="kursus"
-                    required
-                >
-
-                    <option value="">
-                        -- Pilih Kursus --
-                    </option>
-
-                    <?php foreach ($daftarKursus as $kursus): ?>
-
-                        <option
-                            value="<?= htmlspecialchars($kursus) ?>"
-                            <?= $kursusDipilih === $kursus ? 'selected' : '' ?>
-                        >
-                            <?= htmlspecialchars($kursus) ?>
-                        </option>
-
-                    <?php endforeach; ?>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Jenis Peserta
-                </label>
-
-                <div class="radio-group">
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="participant_type"
-                            value="Mahasiswa"
-                            required
-                        >
-                        Mahasiswa
-                    </label>
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="participant_type"
-                            value="Guru"
-                        >
-                        Guru
-                    </label>
-
-                    <label>
-                        <input
-                            type="radio"
-                            name="participant_type"
-                            value="Umum"
-                        >
-                        Umum
-                    </label>
-
-                </div>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Minat Belajar
-                </label>
-
-                <div class="checkbox-group">
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="interests[]"
-                            value="Web Development"
-                        >
-                        Web Development
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="interests[]"
-                            value="Desain"
-                        >
-                        Desain
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="interests[]"
-                            value="Data Analysis"
-                        >
-                        Data Analysis
-                    </label>
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="interests[]"
-                            value="Digital Marketing"
-                        >
-                        Digital Marketing
-                    </label>
-
-                </div>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="catatan">
-                    Catatan
-                </label>
-
-                <textarea
-                    id="catatan"
-                    name="catatan"
-                    rows="4"
-                    placeholder="Tulis catatan jika ada"
-                ></textarea>
-
-            </div>
-
+            <label for="nama">
+                Nama Lengkap
+            </label>
 
             <input
-                type="hidden"
-                name="source"
-                value="website"
+                type="text"
+                id="nama"
+                name="nama"
+                required
             >
 
+        </div>
 
-            <button
-                type="submit"
-                class="button"
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                required
             >
-                Kirim Pendaftaran
-            </button>
 
-        </form>
+        </div>
 
-    </section>
+
+        <!-- TELEPON -->
+
+        <div class="form-group">
+
+            <label for="telepon">
+                Nomor Telepon
+            </label>
+
+            <input
+                type="text"
+                id="telepon"
+                name="telepon"
+                required
+            >
+
+        </div>
+
+
+        <!-- PROGRAM STUDI -->
+
+        <div class="form-group">
+
+            <label for="prodi">
+                Program Studi
+            </label>
+
+            <input
+                type="text"
+                id="prodi"
+                name="prodi"
+                required
+            >
+
+        </div>
+
+
+        <!-- KURSUS -->
+
+        <div class="form-group">
+
+            <label for="kursus">
+                Pilih Kursus
+            </label>
+
+            <select
+                id="kursus"
+                name="kursus"
+                required
+            >
+
+                <option value="">
+                    -- Pilih Kursus --
+                </option>
+
+                <?php foreach ($daftarKursus as $kursus): ?>
+
+                    <option
+                        value="<?= htmlspecialchars($kursus) ?>"
+                        <?= $kursusDipilih === $kursus ? 'selected' : '' ?>
+                    >
+
+                        <?= htmlspecialchars($kursus) ?>
+
+                    </option>
+
+                <?php endforeach; ?>
+
+            </select>
+
+        </div>
+
+
+        <!-- JENIS PESERTA -->
+
+        <div class="form-group">
+
+            <label>
+                Jenis Peserta
+            </label>
+
+            <div class="radio-group">
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="participant_type"
+                        value="Mahasiswa"
+                        required
+                    >
+
+                    Mahasiswa
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="participant_type"
+                        value="Umum"
+                    >
+
+                    Umum
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- MINAT -->
+
+        <div class="form-group">
+
+            <label>
+                Minat Kursus
+            </label>
+
+            <div class="checkbox-group">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="interests[]"
+                        value="Web Development"
+                    >
+
+                    Web Development
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="interests[]"
+                        value="Desain Grafis"
+                    >
+
+                    Desain Grafis
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="interests[]"
+                        value="Data Analysis"
+                    >
+
+                    Data Analysis
+
+                </label>
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="interests[]"
+                        value="Digital Marketing"
+                    >
+
+                    Digital Marketing
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- CATATAN -->
+
+        <div class="form-group">
+
+            <label for="catatan">
+                Catatan
+            </label>
+
+            <textarea
+                id="catatan"
+                name="catatan"
+                placeholder="Masukkan catatan jika diperlukan"
+            ></textarea>
+
+        </div>
+
+
+        <!-- SOURCE -->
+
+        <input
+            type="hidden"
+            name="source"
+            value="website"
+        >
+
+
+        <!-- BUTTON -->
+
+        <button
+            type="submit"
+            class="button"
+        >
+            Daftar Sekarang
+        </button>
+
+    </form>
+
+</section>
 
 </main>
 
@@ -287,7 +331,6 @@ $kursusDipilih = $_GET['kursus'] ?? '';
 
     <p>
         &copy; <?= date('Y') ?> KursusKu.
-        Semua hak dilindungi.
     </p>
 
 </footer>
