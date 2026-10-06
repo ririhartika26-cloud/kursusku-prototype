@@ -1,0 +1,56 @@
+Pertemuan 6 - Test Matrix KursusKu
+
+01 Mahasiswa + Web Development
+Actual   : Rp 700.000
+Expected : Rp 700.000
+Status   : PASS
+
+02 Guru + Web Development
+Actual   : Rp 662.500
+Expected : Rp 662.500
+Status   : PASS
+
+03 Umum + Web Development
+Actual   : Rp 737.500
+Expected : Rp 737.500
+Status   : PASS
+
+04 Pilih 3 minat
+Actual   : Web Development, Desain Grafis, Data Analysis
+Expected : Semua minat tampil
+Status   : PASS
+
+05 Tidak memilih minat
+Actual   : Proses tetap berhasil
+Expected : Form tetap dapat diproses
+Status   : PASS
+
+06 Nama kosong
+Actual   : Nama wajib diisi
+Expected : Nama wajib diisi
+Status   : PASS
+
+07 Email tidak valid
+Actual   : Email wajib valid
+Expected : Email wajib valid
+Status   : PASS
+
+08 Pilih kursus
+Actual   : Pilihan kursus berasal dari array + foreach
+Expected : Pilihan berasal dari array + foreach
+Status   : PASS
+
+09 Mahasiswa
+Actual   : Diskon 10%
+Expected : Diskon 10%
+Status   : PASS
+
+10 Guru
+Actual   : Diskon 15%
+Expected : Diskon 15%
+Status   : PASS
+
+11 Umum
+Actual   : Diskon 5%
+Expected : Diskon 5%
+Status   : PASS
